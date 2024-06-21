@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Professionals</title>
+  </head>
+  <body>
+    <h1>Professionals</h1>
+    <table border="1">
+      <tr>
+        <th>Name</th>
+        <th>Profession</th>
+        <th>Years of Experience</th>
+      </tr>
+      {% for professional in professionals %}
+      <tr>
+        <td>{{ professional[0] }}</td>
+        <td>{{ professional[1] }}</td>
+        <td>{{ professional[2] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
+

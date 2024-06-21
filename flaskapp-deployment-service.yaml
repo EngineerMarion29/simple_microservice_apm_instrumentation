@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  namespace: june11
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: flask-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        env:
+        - name: OTEL_SERVICE_NAME
+          value: flask-app
+        - name: OTEL_RESOURCE_ATTRIBUTES
+          value: "application.name=flask-app,api.name=flask-app,cx.application.name=flask-app,cx.subsystem.name=flask-app"
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: "https://ingress.coralogix.com:443"
+        - name: OTEL_EXPORTER_OTLP_HEADERS
+          value: "Authorization=Bearer%20cxtp_AJYvEtCbmG5sFu6A0mXQKeeJ352SKU,CX-Application-Name=dev-traces-June14,CX-Subsystem-Name=dev-traces"
+        - name: OTEL_TRACES_EXPORTER
+          value: "otlp_proto_grpc"
+        - name: CORALOGIX_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: coralogix-keys
+              key: PRIVATE_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app
+  namespace: june11
+spec:
+  selector:
+    app: flask-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: NodePort
+
