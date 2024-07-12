@@ -1,0 +1,30 @@
+##Step by step procedure
+
+1. Start the minikube cluster
+minikube start env=docker --force
+
+2. Create a k8s namespace
+kubectl create namespace june25
+
+3. Create a secrets for coralogix api key
+kubectl create secret generic coralogix-keys -n <fluentd integration namespace> --from-literal=PRIVATE_KEY=<coralogix-private-key>
+
+4. Build the docker images
+#ensure it is in the minikube env
+eval $(minikube docker-env)
+docker build -t flask-app:latest -f Dockerfile.flask .
+docker build -t mysql:latest -f Dockerfile.mysql .
+
+5. Create a configmap for the database
+kubectl create configmap mysql-initdb-config --from-file=init.sql -n june25
+
+6. Deploy the flask app and mysql
+kubectl apply -f flaskapp-deployment-service.yaml -n june25
+kubectl apply -f mysql-deployment-service.yaml -n june25
+
+7. Check the pods
+kubectl get pods -n june25
+kubectl logs podname -n june25
+
+8. Start the service (env that has the browser, can't be in the terminal that is only doing ssh to the host machine)
+minikube service flask-app -n june25
