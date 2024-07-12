@@ -1,25 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Professionals</title>
-  </head>
-  <body>
-    <h1>Professionals</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Professional List</title>
+</head>
+<body>
+    <h1>Professional List</h1>
     <table border="1">
-      <tr>
-        <th>Name</th>
-        <th>Profession</th>
-        <th>Years of Experience</th>
-      </tr>
-      {% for professional in professionals %}
-      <tr>
-        <td>{{ professional[0] }}</td>
-        <td>{{ professional[1] }}</td>
-        <td>{{ professional[2] }}</td>
-      </tr>
-      {% endfor %}
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Profession</th>
+                <th>Years of Experience</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for professional in professionals %}
+            <tr>
+                <td>{{ professional[0] }}</td>
+                <td>{{ professional[1] }}</td>
+                <td>{{ professional[2] }}</td>
+                <td>
+                    <form action="{{ url_for('delete_professional', name=professional[0]) }}" method="post" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-  </body>
+
+    <h2>Add a New Professional</h2>
+    <form action="{{ url_for('add_professional') }}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" name="profession" required>
+        <br>
+        <label for="years_of_experience">Years of Experience:</label>
+        <input type="number" id="years_of_experience" name="years_of_experience" required>
+        <br>
+        <button type="submit">Add Professional</button>
+    </form>
+</body>
 </html>
 

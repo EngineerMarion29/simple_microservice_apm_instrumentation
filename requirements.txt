@@ -2,7 +2,7 @@ flask
 mysql-connector-python
 opentelemetry-api
 opentelemetry-sdk
-opentelemetry-instrumentation
+opentelemetry-exporter-otlp-proto-grpc
 opentelemetry-instrumentation-flask
-opentelemetry-exporter-otlp
+coralogix-opentelemetry
 opentelemetry-instrumentation-mysql
