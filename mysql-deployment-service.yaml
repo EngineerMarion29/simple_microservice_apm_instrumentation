@@ -2,7 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
+<<<<<<< HEAD
   namespace: june11
+=======
+  namespace: aug12
+>>>>>>> d470d84 (Changes on Oct 24)
 spec:
   replicas: 1
   selector:
@@ -33,7 +37,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mysql
+<<<<<<< HEAD
   namespace: june11
+=======
+  namespace: aug12
+>>>>>>> d470d84 (Changes on Oct 24)
 spec:
   selector:
     app: mysql
