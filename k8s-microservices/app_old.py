@@ -15,7 +15,7 @@ from opentelemetry.instrumentation.mysql import MySQLInstrumentor
 
 # Authorization, CX-Application-Name and CX-Subsystem-Name are mandatory when calling the coralogix endpoint directly.
 headers = ', '.join([
-    f'Authorization=Bearer%20cxtp_AJYvEtCbmG5sFu6A0mXQKeeJ352SKU',
+    f'Authorization=Bearer%20<apikey>',
     "CX-Application-Name=Instrumentation",
     "CX-Subsystem-Name=Instrumentation-App",
 ])
