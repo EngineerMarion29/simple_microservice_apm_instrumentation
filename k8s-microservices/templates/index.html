@@ -1,0 +1,44 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professionals</title>
+</head>
+<body>
+    <h1>List of Professionals</h1>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Profession</th>
+            <th>Years of Experience</th>
+            <th>Action</th>
+        </tr>
+        {% for professional in professionals %}
+        <tr>
+            <td>{{ professional[0] }}</td>
+            <td>{{ professional[1] }}</td>
+            <td>{{ professional[2] }}</td>
+            <td>
+                <form action="{{ url_for('delete_professional', name=professional[0]) }}" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Add a Professional</h2>
+    <form action="{{ url_for('add_professional') }}" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" name="profession" required><br>
+        <label for="years_of_experience">Years of Experience:</label>
+        <input type="number" id="years_of_experience" name="years_of_experience" required><br>
+        <button type="submit">Add</button>
+    </form>
+</body>
+</html>
+

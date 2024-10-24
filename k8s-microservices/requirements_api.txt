@@ -1,0 +1,9 @@
+flask
+mysql-connector-python
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-exporter-otlp-proto-grpc
+opentelemetry-instrumentation-flask
+coralogix-opentelemetry
+opentelemetry-instrumentation-mysql
+flask-cors
